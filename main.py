@@ -1,14 +1,5 @@
 import streamlit as st
 import pandas as pd
-import os
-try:
-    import matplotlib
-except ImportError:
-    os.system("pip install matplotlib")
-try:
-    import seaborn
-except ImportError:
-    os.system("pip install seaborn")
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tratamentos import Vis
