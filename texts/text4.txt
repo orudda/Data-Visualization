@@ -1,0 +1,2 @@
+Esse plot busca entender uma máxima do jogo da NFL, que é a que em condições de muito vento, fica difícil lançar a bola e por isso os times se apoiam mais sobre o jogo corrido, que gasta mais tempo para conseguir o mesmo número de jardas que uma jogada de passe. Correlacionando a velocidade do vento com a média dos totais marcados em cada velocidade, podemos perceber claramente que existe alta correlação negativa entre a velocidade do vento e a quantidade de pontos marcados na partida.
+

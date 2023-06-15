@@ -1,0 +1,2 @@
+Esse plot mostra quais são os spreads mais comuns em todos os jogos da NFL no período, de 1979 até hoje. Podemos ver que, de longe, o spread mais comum é o -3, seguido do -7 e do -10. Isso também confirma a observação empírica, porque no futebol americano, salvo casos raros (como a ocorrência de um safety, uma conversão de dois pontos ou um extra point errado), a pontuação na NFL se dá em incrementos de 3 (field goal) ou 7 (touchdown + extra point). Desse modo, faz sentido que os spreads mais comuns sejam os associados à pontuações comuns.
+

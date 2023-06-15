@@ -3,9 +3,10 @@ import plotly.express as px
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+NUMBER_VISUALIZATIONS=6
 class Vis:
     def __init__(self):
+        self.texts=[]
 
         df_scores = pd.read_csv('archive/spreadspoke_scores.csv')
         df_teams = pd.read_csv('archive/nfl_teams.csv')
@@ -120,3 +121,12 @@ class Vis:
         favorites_per_team = self.df.groupby(['favorite', 'is_huge_favorite'])['favorite'].size().reset_index(name='counts')
         fig = px.bar(favorites_per_team, x = 'favorite', y = 'counts', title = 'Number of times each team has been the pre-match favorite, 1979 - present.', color = 'is_huge_favorite')
         st.plotly_chart(fig)
+
+    def readTexts(self):
+        filename="texts/text"
+        for i in range(NUMBER_VISUALIZATIONS):
+            filen=filename+str(i+1)+".txt"
+            arquivo = open(filen, 'r')
+            self.texts.append(arquivo.read())
+            arquivo.close()
+

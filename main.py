@@ -21,7 +21,8 @@ selected_option = st.sidebar.selectbox("Navegação", menu_options)
 
 #Contribuintes
 owners = ["Arthur Kuahara", "Eduardo Dias", "João Lucas","João Morais", "Othávio Ruddá"]
-
+visualization = Vis()
+visualization.readTexts()
 # Página inicial
 if selected_option == "Home":
     st.header("Bem-vindo ao trabalho de visualização de dados!")
@@ -50,48 +51,47 @@ elif selected_option == "Contribuições":
     cursos_df = cursos_df.reset_index(drop=True)
     st.dataframe(cursos_df)
 
-# Página de professores
-elif selected_option == "Visualização 1":
-    st.header("Visualização 1")
-    st.write("primeira visualização")
-    visualization = Vis()
-    visualization.plotVis1()
-
-
-
 # Página de contato
 elif selected_option == "Dados":
     st.header("Dados Utilizados")
     st.write("descrevemos um pouco dos dados")
 
+
+# Página de professores
+elif selected_option == "Visualização 1":
+    st.header("Visualização 1")
+    st.write("primeira visualização")
+    visualization.plotVis1()
+    st.write(visualization.texts[0])
+
 # Página de dados
 elif selected_option == "Visualização 2":
     st.header("Visualização 3")
     st.write("terceira visualização")
-    visualization = Vis()
     visualization.plotVis2()
+    st.write(visualization.texts[1])
 
 
 elif selected_option == "Visualização 3":
     st.header("Visualização 3")
     st.write("terceira visualização")
-    visualization = Vis()
     visualization.plotVis3()
+    st.write(visualization.texts[2])
 
 elif selected_option == "Visualização 4":
     st.header("Visualização 3")
     st.write("terceira visualização")
-    visualization = Vis()
     visualization.plotVis4()
+    st.write(visualization.texts[3])
 
 elif selected_option == "Visualização 5":
     st.header("Visualização 3")
     st.write("terceira visualização")
-    visualization = Vis()
     visualization.plotVis5()
+    st.write(visualization.texts[4])
 
 elif selected_option == "Visualização 6":
     st.header("Visualização 3")
     st.write("terceira visualização")
-    visualization = Vis()
     visualization.plotVis6()
+    st.write(visualization.texts[5])
