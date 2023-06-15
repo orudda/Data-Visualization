@@ -18,4 +18,4 @@ except ImportError:
     os.system("pip install seaborn")
 
 #run de system
-os.system("py -m streamlit run main.py")
+#os.system("py -m streamlit run main.py")
