@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Título e cabeçalho
-st.title("Visualiação de Dados")
+st.title("Visualização de Dados")
 # st.markdown("Bem-vindos ao site da Escola XYZ!")
 
 # Menu de navegação
