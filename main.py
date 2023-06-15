@@ -73,7 +73,7 @@ elif selected_option == "Visualização 2":
     try:
         visualization.plotVis2()
     except:
-        imagem = Image.open('imagems/newplot.png')
+        imagem = Image.open('imagens/newplot.png')
         imagem.show()
 
     st.write(visualization.texts[1])
