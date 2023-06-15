@@ -54,39 +54,37 @@ elif selected_option == "Contribuições":
 # Página de contato
 elif selected_option == "Dados":
     st.header("Dados Utilizados")
-    st.write("descrevemos um pouco dos dados")
+    arquivo = open('texts/dados.txt', 'r')
+    text = arquivo.read()
+    arquivo.close()
+    st.write(text)
 
 
 # Página de professores
 elif selected_option == "Visualização 1":
     st.header("Visualização 1")
-    st.write("primeira visualização")
     visualization.plotVis1()
     st.write(visualization.texts[0])
 
 # Página de dados
 elif selected_option == "Visualização 2":
-    st.header("Visualização 3")
-    st.write("terceira visualização")
+    st.header("Visualização 2")
     visualization.plotVis2()
     st.write(visualization.texts[1])
 
 
 elif selected_option == "Visualização 3":
     st.header("Visualização 3")
-    st.write("terceira visualização")
     visualization.plotVis3()
     st.write(visualization.texts[2])
 
 elif selected_option == "Visualização 4":
-    st.header("Visualização 3")
-    st.write("terceira visualização")
+    st.header("Visualização 4")
     visualization.plotVis4()
     st.write(visualization.texts[3])
 
 elif selected_option == "Visualização 5":
-    st.header("Visualização 3")
-    st.write("terceira visualização")
+    st.header("Visualização 5")
     visualization.plotVis5()
     st.write(visualization.texts[4])
     visualization.plotVis6()
