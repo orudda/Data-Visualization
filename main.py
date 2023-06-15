@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from tratamentos import Vis
+from PIL import Image
 
 # Configurações de página
 st.set_page_config(
@@ -69,7 +70,12 @@ elif selected_option == "Visualização 1":
 # Página de dados
 elif selected_option == "Visualização 2":
     st.header("Visualização 2")
-    visualization.plotVis2()
+    try:
+        visualization.plotVis2()
+    except:
+        imagem = Image.open('imagems/newplot.png')
+        imagem.show()
+
     st.write(visualization.texts[1])
 
 
