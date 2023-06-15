@@ -20,7 +20,7 @@ menu_options = ["Home", "Contribuições", "Dados", "Visualização 1", "Visuali
 selected_option = st.sidebar.selectbox("Navegação", menu_options)
 
 #Contribuintes
-owners = ["Arthur kunavara", "Eduardo Dias", "João Lucas","João Morais", "Othávio Ruddá"]
+owners = ["Arthur Kuahara", "Eduardo Dias", "João Lucas","João Morais", "Othávio Ruddá"]
 
 # Página inicial
 if selected_option == "Home":
@@ -33,7 +33,7 @@ if selected_option == "Home":
 
     st.subheader("Sumário")
     for i in menu_options:
-        st.write(i)
+        st.write("\t     -"+i)
 
 
 elif selected_option == "Contribuições":
