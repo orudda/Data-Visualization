@@ -7,7 +7,7 @@ from PIL import Image
 
 # Configurações de página
 st.set_page_config(
-    page_title="Visualiação de Dados",
+    page_title="Visualização de Dados",
     page_icon="🎓",
     layout="wide"
 )
