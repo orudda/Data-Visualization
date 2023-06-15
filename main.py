@@ -16,7 +16,7 @@ st.title("Visualiação de Dados")
 # st.markdown("Bem-vindos ao site da Escola XYZ!")
 
 # Menu de navegação
-menu_options = ["Home", "Contribuições", "Dados", "Visualização 1", "Visualização 2", "Visualização 3", "Visualização 4", "Visualização 5", "Visualização 6"]
+menu_options = ["Home", "Contribuições", "Dados", "Visualização 1", "Visualização 2", "Visualização 3", "Visualização 4", "Visualização 5"]
 selected_option = st.sidebar.selectbox("Navegação", menu_options)
 
 #Contribuintes
@@ -89,9 +89,6 @@ elif selected_option == "Visualização 5":
     st.write("terceira visualização")
     visualization.plotVis5()
     st.write(visualization.texts[4])
-
-elif selected_option == "Visualização 6":
-    st.header("Visualização 3")
-    st.write("terceira visualização")
     visualization.plotVis6()
     st.write(visualization.texts[5])
+    
