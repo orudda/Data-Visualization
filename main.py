@@ -91,7 +91,6 @@ elif selected_option == "Visualização 4":
 elif selected_option == "Visualização 5":
     st.header("Visualização 5")
     visualization.plotVis5()
-    st.write(visualization.texts[4])
     visualization.plotVis6()
     st.write(visualization.texts[5])
     
