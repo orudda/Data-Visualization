@@ -3,16 +3,20 @@ import plotly.express as px
 import streamlit as st
 import matplotlib.pyplot as plt
 import seaborn as sns
-NUMBER_VISUALIZATIONS=6
+import requests
+import json
+
+NUMBER_VISUALIZATIONS=7
 class Vis:
     def __init__(self):
         self.texts=[]
 
         df_scores = pd.read_csv('archive/spreadspoke_scores.csv')
         df_teams = pd.read_csv('archive/nfl_teams.csv')
-        df_stadiums = pd.read_csv('archive/nfl_stadiums.csv', encoding = 'latin-1')
+        self.df_stadiums = pd.read_csv('archive/nfl_stadiums.csv', encoding = 'latin-1')
+        self.df_states = pd.read_json('archive/us-states.json')
 
-        df_analysis = df_scores.merge(df_stadiums, left_on = 'stadium', right_on = 'stadium_name')
+        df_analysis = df_scores.merge(self.df_stadiums, left_on = 'stadium', right_on = 'stadium_name')
         df_final = df_analysis[~df_analysis['spread_favorite'].isna()].reset_index(drop = True).copy()
         df_final['total'] = df_final['score_home'] + df_final['score_away']
         dict_teams_corresp = dict(zip(df_teams['team_id'].to_list(), df_teams['team_name'].to_list()))
@@ -121,6 +125,46 @@ class Vis:
         favorites_per_team = self.df.groupby(['favorite', 'is_huge_favorite'])['favorite'].size().reset_index(name='counts')
         fig = px.bar(favorites_per_team, x = 'favorite', y = 'counts', title = 'Number of times each team has been the pre-match favorite, 1979 - present.', color = 'is_huge_favorite')
         st.plotly_chart(fig)
+        
+    def plotVis7(self):
+        df_stadium = self.df_stadiums['stadium_location']
+        print(df_stadium)
+        df_stadium = df_stadium.str.split(", ").str[1]
+        df_contagem = df_stadium.value_counts().reset_index()
+        df_contagem.columns = ['Sigla', 'Total']
+        dicionario_contagem = df_contagem.set_index('Sigla')['Total'].to_dict()
+        
+        properties = []
+        for feature in self.df_states['features']:
+            feature['properties']['id'] = feature['id']
+            feature['properties']['total'] = dicionario_contagem.get(feature['id'], 0)
+            properties.append(feature["properties"])
+        df = pd.DataFrame(properties)
+        df = df.rename(columns={'name': 'Uf', 'id': 'Sigla', 'total': 'Total'})
+        
+        with open('archive/us-states.json') as data:
+            geojson_data = json.load(data)
+            
+        fig = px.choropleth_mapbox(
+            df, # primeiro parâmetro é o dataframe com os dados
+            locations = 'Sigla', # coluna do DF que referencia as IDs do mapa
+            geojson = geojson_data, # arquivo com os limites dos estados
+            color = 'Total', # indicando qual coluna será utilizada para pintar os estados
+            mapbox_style = "carto-positron", # estilo do mapa
+            center = {'lon':-95, 'lat':39}, # definindo a posição inicial do mapa
+            zoom = 2, # definindo o zoom do mapa (número inteiro entre 0 e 20)
+            opacity = 0.5, # definindo uma opacidade para a cor do mapa
+            hover_name = "Sigla", # nome do hover
+            color_continuous_scale = 'reds', # muda a escala de cor
+            range_color = [0, df['Total'].max()], # limites do eixo Y
+            hover_data=['Uf'],
+        )
+        fig.update_layout(
+            coloraxis_colorbar=dict(title='Total estadios por estado')  # Nome personalizado da legenda
+        )
+        
+        st.plotly_chart(fig)
+
 
     def readTexts(self):
         filename="texts/text"
