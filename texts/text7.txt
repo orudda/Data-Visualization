@@ -1,1 +1,1 @@
-Esse plot busca mostrar onde está localizado os estadios de futebol da nfl e sua quantidade por estado através de um mapa de calor.
+Esse plot busca mostrar onde está localizado os estadios de futebol da nfl e sua quantidade por estado através de um mapa temático, pode-se observar que quanto mais estadios em uma região mais forte a cor fica naquele local.

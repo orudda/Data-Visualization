@@ -46,7 +46,11 @@ elif selected_option == "Contribuições":
     contributions = {
         "Contribuinte": owners,
         # "contribuição": owners,
-        "Contribuição": ["5,6","4","1","2","3"],
+        "Contribuição": ["Desenvolveu a visualização 5 e participou do desenvolvimento do  design do site e do processo de deploy do sistema web.",
+                         "Desenvolveu a visualização 1 e 6 e participou do processo de deploy do sistema web.",
+                         "Desenvolveu a visualização 4, participou do desenvolvimento da visualização 6 e participou do processo de deploy do sistema web.",
+                         "Desenvolveu a visualização 3 e participou do desenvolvimento do  design do site e do processo de deploy do sistema web.",
+                         "Desenvolveu a visualização 2 e participou do desenvolvimento do  design do site e do processo de deploy do sistema web."]
     }
     cursos_df = pd.DataFrame(contributions)
     cursos_df = cursos_df.reset_index(drop=True)
@@ -55,7 +59,7 @@ elif selected_option == "Contribuições":
 # Página de contato
 elif selected_option == "Dados":
     st.header("Dados Utilizados")
-    arquivo = open('texts/dados.txt', 'r')
+    arquivo = open('texts/dados.txt', 'r', encoding='utf-8')
     text = arquivo.read()
     arquivo.close()
     st.write(text)

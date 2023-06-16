@@ -43,11 +43,11 @@ class Vis:
         spread_difference = favorite_score - underdog_score
 
         if spread_difference > 0 and spread_difference < abs(row['spread_favorite']):
-            return "favorite won, but didn't cover"
+            return "Favorito ganha, mas não superando o esperado"
         elif spread_difference >= abs(row['spread_favorite']):
-            return "favorite won and covered the spread"
+            return "Favorito ganha superando o esperado"
         else:
-            return "underdog won outright"
+            return "Azarão ganha"
 
     
     def isHugeFavorite(self, row):
@@ -92,7 +92,10 @@ class Vis:
         count_within_spread = count_within_spread[count_within_spread['schedule_season'] >= 1979]
 
         fig = px.bar(count_within_7_points, x = 'schedule_season', y = 'ratio')
-        fig.update_layout(title = 'Percentage of games in season where the total falls within 3 points of the projected total')
+        fig.update_layout(title = 'Porcentagem de jogos por temporada em que o total fica dentro de 3 pontos do total projetado.')
+        fig.update_xaxes(title='Temporada')
+        fig.update_yaxes(title='Porcentagem')
+        fig.update_traces(hovertemplate='Temporada: %{x}<br>Porcentagem: %{y:.0%}')
         fig.layout.yaxis.tickformat = ',.0%'
         st.plotly_chart(fig)
 
@@ -102,28 +105,57 @@ class Vis:
         grouped_season_outcome['percentage'] = grouped_season_outcome.groupby('schedule_season')['count'].apply(lambda x: x / x.sum())
 
         fig = px.area(grouped_season_outcome, x='schedule_season', y='percentage', color='outcome', title='Percentage of Outcome by Season')
+        
+        fig.update_layout(title = 'Porcentagem de resultados por temporada', legend_title = 'Resultado')
+        fig.update_xaxes(title='Temporada')
+        fig.update_yaxes(title='Porcentagem')
+        
         fig.layout.yaxis.tickformat = '.0%'
         st.plotly_chart(fig)
 
     def plotVis3(self):
         fig = px.histogram(self.df, x = 'spread_favorite', nbins=100, title='Most common spreads in the NFL, 1979 - present')
+
+        fig.update_layout(title = 'Spreads mais comuns na NFL, 1979 - Presente')
+        fig.update_xaxes(title='Spread favorito')
+        fig.update_yaxes(title='Contagem')
+        fig.update_traces(hovertemplate='Spread favorito: %{x}<br>Contagem: %{y}')
+        
+        
         st.plotly_chart(fig)
 
     def plotVis4(self):
         test = self.df.groupby(['weather_wind_mph'])['total'].mean().reset_index()
         fig = px.scatter(test, x = 'weather_wind_mph', y = 'total', title = 'Average Total Score by Wind Velocity, Miles per Hour')
         fig.update_layout(yaxis_range=[22, 50])
+        
+        fig.update_layout(title = 'Pontuação total média por velocidade do vento, milhas por hora')
+        fig.update_xaxes(title='Velocidade do vento em mph')
+        fig.update_yaxes(title='Total')
+        fig.update_traces(hovertemplate='Velocidade do vento em mph: %{x}<br>Total: %{y}')
+        
         st.plotly_chart(fig)
     
     def plotVis5(self):
         favorites_per_team = self.df.groupby(['favorite', 'is_huge_favorite'])['is_huge_favorite'].size().reset_index(name='counts')
         favorites_per_team = favorites_per_team[favorites_per_team['is_huge_favorite'] == True]
         fig = px.bar(favorites_per_team, x = 'favorite', y = 'counts', title = 'Number of times each team has been favored by at least two touchdowns, 1979 - present.')
+        
+        fig.update_layout(title = 'Número de vezes que cada time foi favorecido por pelo menos dois touchdowns, 1979-presente')
+        fig.update_xaxes(title='Favorito')
+        fig.update_yaxes(title='Contagem')
+        
         st.plotly_chart(fig)
 
     def plotVis6(self):
         favorites_per_team = self.df.groupby(['favorite', 'is_huge_favorite'])['favorite'].size().reset_index(name='counts')
         fig = px.bar(favorites_per_team, x = 'favorite', y = 'counts', title = 'Number of times each team has been the pre-match favorite, 1979 - present.', color = 'is_huge_favorite')
+        
+        fig.update_layout(title = 'Número de vezes que cada time foi o favorito pré-jogo, 1979-presente', legend_title = 'Grande Favorito')
+        fig.update_xaxes(title='Favorito')
+        fig.update_yaxes(title='Contagem')
+
+        
         st.plotly_chart(fig)
         
     def plotVis7(self):
@@ -160,6 +192,7 @@ class Vis:
             hover_data=['Uf'],
         )
         fig.update_layout(
+            title = "Quantidade de estadios por região",
             coloraxis_colorbar=dict(title='Total estadios por estado')  # Nome personalizado da legenda
         )
         
@@ -170,7 +203,7 @@ class Vis:
         filename="texts/text"
         for i in range(NUMBER_VISUALIZATIONS):
             filen=filename+str(i+1)+".txt"
-            arquivo = open(filen, 'r')
+            arquivo = open(filen, 'r', encoding='utf-8')
             self.texts.append(arquivo.read())
             arquivo.close()
 
