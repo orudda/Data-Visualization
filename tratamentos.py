@@ -102,7 +102,8 @@ class Vis:
     def plotVis2(self):
         grouped_season_outcome = self.df.groupby(['schedule_season', 'outcome']).size().reset_index(name='count')
         grouped_season_outcome = grouped_season_outcome[grouped_season_outcome['schedule_season'] >= 1979]
-        grouped_season_outcome['percentage'] = grouped_season_outcome.groupby('schedule_season')['count'].apply(lambda x: x / x.sum())
+        # st.dataframe(grouped_season_outcome)
+        grouped_season_outcome['percentage'] = grouped_season_outcome.groupby('schedule_season', group_keys=False)['count'].apply(lambda x: x / x.sum())
 
         fig = px.area(grouped_season_outcome, x='schedule_season', y='percentage', color='outcome', title='Percentage of Outcome by Season')
         
