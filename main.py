@@ -74,12 +74,7 @@ elif selected_option == "Visualização 1":
 # Página de dados
 elif selected_option == "Visualização 2":
     st.header("Visualização 2")
-    try:
-        visualization.plotVis2()
-    except:
-        imagem = Image.open('imagens/newplot.png')
-        st.image(imagem)
-
+    visualization.plotVis2()
     st.write(visualization.texts[1])
 
 
